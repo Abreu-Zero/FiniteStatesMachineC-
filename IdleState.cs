@@ -18,9 +18,15 @@ public class IdleState : State
 
     public override void Update()
     {
-        if(Random.Range(0,5) >= 4)
+        if (Random.Range(0,5) >= 4)
         {
             nextState = new PatrolState(npc, agent, player);
+            phase = EVENT.EXIT;
+        }
+
+        if (PlayerInView())
+        {
+            nextState = new PursueState(npc, agent, player);
             phase = EVENT.EXIT;
         }
     }
